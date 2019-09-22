@@ -1,0 +1,70 @@
+### JWT 회원가입
+
+POST http://localhost:8080/member/signup
+Content-Type: application/json
+
+{
+  "userId": "leel2415",
+  "userPass": "1234"
+}
+
+> {%
+client.global.set("Authorization", response.headers.valueOf("Authorization"));
+client.log(client.global.get("Authorization"));
+ %}
+
+### JWT 로그인
+
+POST http://localhost:8080/member/signin
+Content-Type: application/json
+
+{
+  "userId": "leel2415",
+  "userPass": "1234"
+}
+
+> {%
+client.global.set("Authorization", response.headers.valueOf("Authorization"));
+client.log(client.global.get("Authorization"));
+ %}
+
+### JWT 재발급
+
+POST http://localhost:8080/member/refresh
+Content-Type: application/json
+Authorization: Bearer {{Authorization}}
+
+> {%
+client.global.set("Authorization", response.headers.valueOf("Authorization"));
+client.log(client.global.get("Authorization"));
+ %}
+
+
+### csv load
+
+POST http://localhost:8080/api/save
+Content-Type: application/json
+Authorization: {{Authorization}}
+
+
+### 인터넷뱅킹 서비스 접속 기기 목록을 출력하는 API 를 개발
+
+GET http://localhost:8080/api/device/list
+Authorization: {{Authorization}}
+
+### 각 년도별로 인터넷뱅킹을 가장 많이 이용하는 접속기기를 출력하는 API 를 개발
+
+GET http://localhost:8080/api/device/list/max
+Authorization: {{Authorization}}
+
+### 특정 년도를 입력받아 그 해에 인터넷뱅킹에 가장 많이 접속하는 기기 이름을 출력
+
+GET http://localhost:8080/api/device/top/2011
+Authorization: {{Authorization}}
+
+### 디바이스 아이디를 입력받아 인터넷뱅킹에 접속 비율이 가장 많은 해를 출력
+
+GET http://localhost:8080/api/rate/top/DIS0001
+Authorization: {{Authorization}}
+
+### 인터넷뱅킹 접속 기기 ID 를 입력받아 2019 년도 인터넷뱅킹 접속 비율을 예측하는 API 를 개발

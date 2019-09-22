@@ -1,0 +1,29 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:~/pay
+    driver-class-name: org.h2.Driver
+    username: pay
+    password:
+  application:
+    base-package: com.leel2415.kakaopay
+  jpa:
+    hibernate:
+      ddl-auto: create
+  main:
+    allow-bean-definition-overriding: true
+
+
+logging:
+  level:
+    com.leel2415.kakaopay: DEBUG
+
+server:
+  port: 8080
+
+kakaopay:
+  jwt-key: kakaopayTest
+  jwt-header-name: Authorization
+  access-token-validity-seconeds: 1800
