@@ -1,12 +1,15 @@
 package com.leel2415.kakaopay.api.web;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.leel2415.kakaopay.api.entity.Device;
 import com.leel2415.kakaopay.api.entity.View;
 import com.leel2415.kakaopay.api.service.ApiService;
 import com.leel2415.kakaopay.common.ResponseBase;
+import com.leel2415.kakaopay.common.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -66,5 +69,13 @@ public class ApiController {
     @JsonView(View.ExceptId.class)
     public ResponseEntity<Map> getTopYear(@PathVariable("deviceId") String deviceId){
         return ResponseBase.ok(apiService.getTopYear(deviceId));
+    }
+
+    @GetMapping("/device/predict")
+    public ResponseEntity<Map> gerPrediectYear(@RequestBody Map<String, String> device){
+        if(StringUtils.isEmpty(device.get("deviceId"))){
+            throw new BizException("ERROR.API", "검색을 위한 deviceId를 입력해주세요.");
+        }
+        return ResponseBase.ok(apiService.gerPrediectYear(device.get("deviceId")));
     }
 }

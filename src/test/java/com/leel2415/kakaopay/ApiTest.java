@@ -9,6 +9,7 @@ import com.leel2415.kakaopay.api.dao.DeviceRepository;
 import com.leel2415.kakaopay.api.entity.Access;
 import com.leel2415.kakaopay.api.entity.Device;
 import com.leel2415.kakaopay.api.service.ApiService;
+import com.leel2415.kakaopay.api.util.LinearRegression;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +39,9 @@ public class ApiTest {
 
     @Autowired
     private AccessRepositorySupport accessRepositorySupport;
+
+    @Autowired
+    private LinearRegression linearRegression;
 
     @Test
     @Transactional
@@ -113,6 +118,26 @@ public class ApiTest {
     @Transactional
     public void findMyMaxDeviceYear() {
         log.debug(accessRepositorySupport.findMyMaxDeviceYear("DIS0001").toString());
+    }
+
+    @Test
+    public void setLinearRegressionTest(){
+
+        List<Access> list = accessRepository.findByDeviceId("DIS0005");
+        log.debug(list.toString());
+
+        List<Integer> x = new ArrayList<>();
+        List<Double> y = new ArrayList<>();
+
+        for(Access access : list){
+            try {
+                x.add(Integer.parseInt(access.getYear()));
+                y.add(Double.parseDouble(access.getRate()));
+            } catch (NumberFormatException e){
+                y.add(0.0);
+            }
+        }
+        log.debug(linearRegression.predictForValue(x,y,2019) + "");
     }
 }
 

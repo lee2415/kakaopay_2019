@@ -5,7 +5,7 @@
 구분|제품명|Version
 --|--|--
 |개발언어|Java|1.8
-| DBMS | H2 |1.4.197   
+| DBMS | H2 |1.4.199   
 | Framework | Spring Boot | 2.1.8.RELEASE 
 
 # 문제해결 전략
@@ -19,6 +19,10 @@
 4. JPA 만으로 결과값 조회가 어려운 케이스에 QueryDSL을 사용하여 진행함.
 
 5. 요구사항에 있는 Json return 형식을 맞추기 위해 JsonProperty, JsonView, JsonAnyGetter를 사용
+
+6. 예측을 진행하기 위해 LinearRegression (선형회기) 알고리즘을 사용 (웹상의 코드를 사용)
+
+7. 테스트를 위핸 ApiTest.http를 만들어 사용
 
 # 빌드 및 실행 방법
 ### 빌드 방법
@@ -293,3 +297,21 @@ API 설명|디바이스 아이디를 입력받아 인터넷뱅킹에 접속 비�
     }
 
 * * *
+
+6. **인터넷뱅킹 접속 기기 ID 를 입력받아 2019 년도 인터넷뱅킹 접속 비율을 예측하는 API 를 개발**
+
+구분|값
+URL|/api/device/predict
+method|GET
+API 설명|인터넷뱅킹 접속 기기 ID를 입력받아 2019년 인터넷뱅킹 접속 비율을 예측
+
+### input example
+    {
+      "deviceId": "DIS0002"
+    }
+### output example
+    {
+      "device_name": "데스크탑 컴퓨터",
+      "year": "2019",
+      "rate": 42.0
+    }

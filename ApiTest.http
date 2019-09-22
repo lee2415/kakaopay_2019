@@ -68,3 +68,13 @@ GET http://localhost:8080/api/rate/top/DIS0001
 Authorization: {{Authorization}}
 
 ### 인터넷뱅킹 접속 기기 ID 를 입력받아 2019 년도 인터넷뱅킹 접속 비율을 예측하는 API 를 개발
+
+GET http://localhost:8080/api/device/predict
+Content-Type: application/json
+Authorization: {{Authorization}}
+
+{
+  "deviceId": "DIS0002"
+}
+
+###

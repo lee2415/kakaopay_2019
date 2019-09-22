@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface AccessRepository extends JpaRepository<Access, String> {
     public List<Access> findAll();
+    public List<Access> findByDeviceId(String deviceId);
 }
