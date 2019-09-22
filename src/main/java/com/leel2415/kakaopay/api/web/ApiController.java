@@ -1,6 +1,7 @@
 package com.leel2415.kakaopay.api.web;
 
-import com.leel2415.kakaopay.api.entity.Device;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.leel2415.kakaopay.api.entity.View;
 import com.leel2415.kakaopay.api.service.ApiService;
 import com.leel2415.kakaopay.common.ResponseBase;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -54,15 +54,16 @@ public class ApiController {
      * @return
      */
     @GetMapping("/device/top/{year}")
+    @JsonView(View.ExceptId.class)
     public ResponseEntity<Map> getTopDevice(@PathVariable("year") String year){
         return ResponseBase.ok(apiService.getTopDevice(year));
     }
-
 
     /**
      * 디바이스 아이디를 입력받아 인터넷뱅킹에 접속 비율이 가장 많은 해를 출력
      */
     @GetMapping("/rate/top/{deviceId}")
+    @JsonView(View.ExceptId.class)
     public ResponseEntity<Map> getTopYear(@PathVariable("deviceId") String deviceId){
         return ResponseBase.ok(apiService.getTopYear(deviceId));
     }

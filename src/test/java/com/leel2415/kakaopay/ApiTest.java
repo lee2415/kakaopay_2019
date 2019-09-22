@@ -1,7 +1,6 @@
 package com.leel2415.kakaopay;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 import com.leel2415.kakaopay.api.dao.AccessRepository;
